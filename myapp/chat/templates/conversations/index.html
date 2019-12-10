@@ -1,0 +1,17 @@
+{% if conversation_list %}
+  <ul>
+  {% for conversation in conversation_list %}
+      <li><a href="/chat/{{ conversation.id }}/">{{ conversation.conv_name }}</a></li>
+  {% endfor %}
+  </ul>
+{% else %}
+  <p>You don't have any conversations yet</p>
+{% endif %}
+
+
+<form action="{% url 'chat:new_conversation' %}" method="post">
+    {% csrf_token %}
+    <input type="text" name="conv_name">
+    <!-- <label for="message{{ forloop.counter }}">{{ message.text }}</label><br> -->
+<input type="submit" value="Crear nueva conversacion">
+</form>

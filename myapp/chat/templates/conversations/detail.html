@@ -1,0 +1,18 @@
+<h1>{{ conversation.conv_name }}</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+{% for message in conversation.message_set.all %}
+<p>{{ message.text }}</p>
+{% endfor %}
+
+<form action="{% url 'chat:send' conversation.id %}" method="post">
+    {% csrf_token %}
+    <input type="text" name="sent_text" value="write here">
+    <!-- <label for="message{{ forloop.counter }}">{{ message.text }}</label><br> -->
+<input type="submit" value="Send">
+</form>
+
+<form action="{% url 'chat:index' %}" method="get">
+    <input type="submit" value="Volver a conversaciones" />
+</form>
